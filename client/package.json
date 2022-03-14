@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "npm install --include=dev && npm run build:parcel",
+    "build:parcel": "parcel build index.html",
     "dev": "parcel watch index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
