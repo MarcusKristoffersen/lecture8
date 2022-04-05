@@ -1,4 +1,4 @@
-# OpenID Connect - log on with Google
+# Lecture 8: OpenID Connect - log on with Google
 
 https://lecture8.herokuapp.com/
 
@@ -10,8 +10,20 @@ https://lecture8.herokuapp.com/
 * [x] Application registration in Google Developer Console
 * [x] Pick up token from callback redirect
 * [x] Save token in cookie
-* [ ] Fetch user information from userinfo call with token
-* [ ] Move configuration to server
+* [x] Fetch user information from userinfo call with token
 * [ ] Log out?
-* [ ] Set user on Context
-* 
+
+
+
+## Lecture 11: Log in with Active Directory(school account)
+
+
+* [ ] Review openid connect
+* [ ] Setup prebuilt application with Active Directory
+* [ ] Review lecture 8
+* [ ] Fix issues from lecture 8
+  * [ ] Move configuration to server
+  * [ ] Set user on Context
+  * [ ] Error handling
+* [ ] Change Identity Provider (ID-porten)
+
