@@ -127,24 +127,27 @@ function Profile() {
   );
 }
 
-const LoginContext = React.createContext({
-  response_type: "token",
-  client_id:
-    "646025809123-lief8ln7sasibgeabkfbbp5e6mhe7fjh.apps.googleusercontent.com",
-  discovery_endpoint:
-    "https://accounts.google.com/.well-known/openid-configuration",
-});
+const LoginContext = React.createContext();
 
 function Application() {
+  const { loading, error, data } = useLoader(() => fetchJSON("/api/config"));
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>{error.toString()}</div>;
+  }
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<FrontPage />} />
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/login/callback"} element={<LoginCallback />} />
-        <Route path={"/profile"} element={<Profile />} />
-      </Routes>
-    </BrowserRouter>
+    <LoginContext.Provider value={data}>
+      <BrowserRouter>
+        <Routes>
+          <Route path={"/"} element={<FrontPage />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/login/callback"} element={<LoginCallback />} />
+          <Route path={"/profile"} element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
+    </LoginContext.Provider>
   );
 }
 

@@ -20,12 +20,22 @@ async function fetchJSON(url, options) {
   return await res.json();
 }
 
+const discoveryEndpoint =
+  "https://accounts.google.com/.well-known/openid-configuration";
+
+app.get("/api/config", (req, res) => {
+  res.json({
+    response_type: "token",
+    client_id:
+      "646025809123-lief8ln7sasibgeabkfbbp5e6mhe7fjh.apps.googleusercontent.com",
+    discovery_endpoint,
+  });
+});
+
 app.get("/api/login", async (req, res) => {
   const { access_token } = req.signedCookies;
 
-  const { userinfo_endpoint } = await fetchJSON(
-    "https://accounts.google.com/.well-known/openid-configuration"
-  );
+  const { userinfo_endpoint } = await fetchJSON(discoveryEndpoint);
 
   const userinfo = await fetch(userinfo_endpoint, {
     headers: {
