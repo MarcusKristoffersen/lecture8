@@ -20,14 +20,14 @@ async function fetchJSON(url, options) {
   return await res.json();
 }
 
-const discoveryEndpoint =
-  "https://accounts.google.com/.well-known/openid-configuration";
+const discovery_endpoint =
+  "https://oidc-ver1.difi.no/idporten-oidc-provider/.well-known/openid-configuration";
+const client_id = process.env.CLIENT_ID;
 
 app.get("/api/config", (req, res) => {
   res.json({
     response_type: "token",
-    client_id:
-      "646025809123-lief8ln7sasibgeabkfbbp5e6mhe7fjh.apps.googleusercontent.com",
+    client_id,
     discovery_endpoint,
   });
 });
@@ -35,7 +35,7 @@ app.get("/api/config", (req, res) => {
 app.get("/api/login", async (req, res) => {
   const { access_token } = req.signedCookies;
 
-  const { userinfo_endpoint } = await fetchJSON(discoveryEndpoint);
+  const { userinfo_endpoint } = await fetchJSON(discovery_endpoint);
 
   const userinfo = await fetch(userinfo_endpoint, {
     headers: {
