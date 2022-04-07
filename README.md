@@ -18,8 +18,8 @@ https://lecture8.herokuapp.com/
 ## Lecture 11: Log in with Active Directory(school account)
 
 
-* [ ] Review openid connect
-* [ ] Setup prebuilt application with Active Directory
+* [x] Review openid connect
+* [x] Setup prebuilt application with Active Directory
 * [ ] Review lecture 8
 * [ ] Fix issues from lecture 8
   * [ ] Move configuration to server
