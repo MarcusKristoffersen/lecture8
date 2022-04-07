@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   BrowserRouter,
@@ -31,15 +31,14 @@ async function fetchJSON(url) {
 }
 
 function Login() {
+  const { discovery_endpoint, client_id, response_type } =
+    useContext(LoginContext);
   useEffect(async () => {
-    const { authorization_endpoint } = await fetchJSON(
-      "https://accounts.google.com/.well-known/openid-configuration"
-    );
+    const { authorization_endpoint } = await fetchJSON(discovery_endpoint);
 
     const parameters = {
-      response_type: "token",
-      client_id:
-        "646025809123-lief8ln7sasibgeabkfbbp5e6mhe7fjh.apps.googleusercontent.com",
+      response_type,
+      client_id,
       scope: "email profile",
       redirect_uri: window.location.origin + "/login/callback",
     };
@@ -127,6 +126,14 @@ function Profile() {
     </div>
   );
 }
+
+const LoginContext = React.createContext({
+  response_type: "token",
+  client_id:
+    "646025809123-lief8ln7sasibgeabkfbbp5e6mhe7fjh.apps.googleusercontent.com",
+  discovery_endpoint:
+    "https://accounts.google.com/.well-known/openid-configuration",
+});
 
 function Application() {
   return (
