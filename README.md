@@ -27,4 +27,6 @@ https://lecture8.herokuapp.com/
   * [x] Error handling
 * [ ] Change Identity Provider (ID-porten)
 
+
+Er på 1:22:54 i forelesningen
 Finne CLIENT_ID

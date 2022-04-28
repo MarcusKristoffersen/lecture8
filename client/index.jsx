@@ -36,6 +36,7 @@ function Login() {
       scope,
       redirect_uri: window.location.origin + "/login/callback",
     };
+
     window.location.href =
       authorization_endpoint + "?" + new URLSearchParams(parameters);
   }, []);
@@ -59,6 +60,7 @@ function LoginCallback() {
       setError(`Error: ${error} ${error_description}`);
       return;
     }
+
     if (!access_token) {
       setError("Missing access token");
       return;
@@ -89,7 +91,7 @@ function LoginCallback() {
     );
   }
 
-  return <h1>Please wait ...</h1>;
+  return <h1>Please wait...</h1>;
 }
 
 function Profile() {
@@ -98,7 +100,7 @@ function Profile() {
   });
 
   if (loading) {
-    return <div>Please wait ...</div>;
+    return <div>Please wait...</div>;
   }
   if (error) {
     return <div>Error! {error.toString()}</div>;
@@ -106,8 +108,12 @@ function Profile() {
 
   return (
     <div>
-      <h1>Profile</h1>
-      <div>{JSON.stringify(data)}</div>
+      <h1>
+        Profile for {data.name} ({data.email})
+      </h1>
+      <div>
+        <img src={data.picture} alt={"Profile picture"} />
+      </div>
     </div>
   );
 }
@@ -122,6 +128,7 @@ function Application() {
   if (error) {
     return <div>{error.toString()}</div>;
   }
+
   return (
     <LoginContext.Provider value={data}>
       <BrowserRouter>
